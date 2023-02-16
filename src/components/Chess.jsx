@@ -3,62 +3,63 @@ import './Chessboard.css';
 
 
 function Chess() {
+  const [selectedPiece, setSelectedPiece] = useState(null);
   const [pieces, setPieces] = useState([
-    { type: 'rook', position: 'a8' },
-    { type: 'knight', position: 'b8' },
-    { type: 'bishop', position: 'c8' },
-    { type: 'queen', position: 'd8' },
-    { type: 'king', position: 'e8' },
-    { type: 'bishop', position: 'f8' },
-    { type: 'knight', position: 'g8' },
-    { type: 'rook', position: 'h8' },
-    { type: 'pawn', position: 'a7' },
-    { type: 'pawn', position: 'b7' },
-    { type: 'pawn', position: 'c7' },
-    { type: 'pawn', position: 'd7' },
-    { type: 'pawn', position: 'e7' },
-    { type: 'pawn', position: 'f7' },
-    { type: 'pawn', position: 'g7' },
-    { type: 'pawn', position: 'h7' },
-    { type: 'rook', position: 'a1' },
-    { type: 'knight', position: 'b1' },
-    { type: 'bishop', position: 'c1' },
-    { type: 'queen', position: 'd1' },
-    { type: 'king', position: 'e1' },
-    { type: 'bishop', position: 'f1' },
-    { type: 'knight', position: 'g1' },
-    { type: 'rook', position: 'h1' },
-    { type: 'pawn', position: 'a2' },
-    { type: 'pawn', position: 'b2' },
-    { type: 'pawn', position: 'c2' },
-    { type: 'pawn', position: 'd2' },
-    { type: 'pawn', position: 'e2' },
-    { type: 'pawn', position: 'f2' },
-    { type: 'pawn', position: 'g2' },
-    { type: 'pawn', position: 'h2' },
+    { position: 'a8' },
+    { position: 'b8' },
+    { position: 'c8' },
+    { position: 'd8' },
+    { position: 'e8' },
+    { position: 'f8' },
+    { position: 'g8' },
+    { position: 'h8' },
+    { position: 'a7' },
+    { position: 'b7' },
+    { position: 'c7' },
+    { position: 'd7' },
+    { position: 'e7' },
+    { position: 'f7' },
+    { position: 'g7' },
+    { position: 'h7' },
+    { position: 'a1' },
+    { position: 'b1' },
+    { position: 'c1' },
+    { position: 'd1' },
+    { position: 'e1' },
+    { position: 'f1' },
+    { position: 'g1' },
+    { position: 'h1' },
+    { position: 'a2' },
+    { position: 'b2' },
+    { position: 'c2' },
+    { position: 'd2' },
+    { position: 'e2' },
+    { position: 'f2' },
+    { position: 'g2' },
+    { position: 'h2' },
   ]);
 
   function handleClick(square) {
-    // Handle the user's click on a square
-    // Move the selected piece to the new square
+    setSelectedPiece(square)
     console.log(square);
   }
     
   return (
-    <div>
+    <div className='chess-div'>
       <table className="chessboard">
       <tbody>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((row) => (
-            <tr key={row} onClick={(e) => console.log(e.target)}>
+            <tr key={row}>
               {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((col) => {
                 const isDarkSquare = (row + col.charCodeAt(0)) % 2 !== 0;
                 const piece = pieces.find((p) => p.position === col + row);
-
+                // console.log();
                 return (
                   <td
                     key={col}
+                    style={{backgroundColor:selectedPiece == col+row ? 'red' : null, pointerEvents:isDarkSquare ? 'none' : null}}
                     className={isDarkSquare ? 'dark-square' : 'light-square'}
-                    onClick={() => handleClick(col + row)}
+                    onClick={() => handleClick(col+row)}
                   >
                   </td>
                 );
